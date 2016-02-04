@@ -4,7 +4,7 @@ using namespace cv;
 using namespace ofxCv;
 
 void ofApp::setup(){
-	grabber.initGrabber(640,480);
+	grabber.setup(640,480);
 }
 
 void ofApp::update(){
@@ -19,7 +19,7 @@ void ofApp::draw(){
 	flow.draw();
 	if(ofGetMousePressed()){
 		ofNoFill();
-		ofRect(rect);
+		ofDrawRectangle(rect);
 	}
 }
 

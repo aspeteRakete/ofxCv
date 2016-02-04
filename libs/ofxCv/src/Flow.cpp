@@ -1,4 +1,5 @@
 #include "ofxCv/Flow.h"
+#include "ofGraphics.h"
 
 namespace ofxCv {
 	
@@ -194,7 +195,7 @@ namespace ofxCv {
 		ofVec2f scale(rect.width/getWidth(),rect.height/getHeight());
 		for(int i = 0; i < (int)prevPts.size(); i++) {
 			if(status[i]){
-				ofLine(toOf(prevPts[i])*scale+offset, toOf(nextPts[i])*scale+offset);
+				ofDrawLine(toOf(prevPts[i])*scale+offset, toOf(nextPts[i])*scale+offset);
 			}
 		}
 	}
@@ -320,7 +321,7 @@ namespace ofxCv {
 		for(int y = 0; y < flow.rows; y += stepSize) {
 			for(int x = 0; x < flow.cols; x += stepSize) {
 				ofVec2f cur = ofVec2f(x, y) * scale + offset;
-				ofLine(cur, getFlowPosition(x, y) * scale + offset);
+				ofDrawLine(cur, getFlowPosition(x, y) * scale + offset);
 			}
 		}
 	}

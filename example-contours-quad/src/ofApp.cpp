@@ -4,7 +4,7 @@ using namespace ofxCv;
 using namespace cv;
 
 void ofApp::setup() {
-	cam.initGrabber(640, 480);
+	cam.setup(640, 480);
 	contourFinder.setMinAreaRadius(10);
 	contourFinder.setMaxAreaRadius(200);
 	unwarped.allocate(150, 100, OF_IMAGE_COLOR);
@@ -52,16 +52,16 @@ void ofApp::draw() {
 	ofTranslate(8, 75);
 	ofFill();
 	ofSetColor(0);
-	ofRect(-3, -3, 64+6, 64+6);
+	ofDrawRectangle(-3, -3, 64+6, 64+6);
 	ofSetColor(targetColor);
-	ofRect(0, 0, 64, 64);
+	ofDrawRectangle(0, 0, 64, 64);
 	
 	ofSetColor(255);
 	unwarped.draw(0, 70);
 }
 
 void ofApp::mousePressed(int x, int y, int button) {
-	targetColor = cam.getPixelsRef().getColor(x, y);
+	targetColor = cam.getPixels().getColor(x, y);
 	contourFinder.setTargetColor(targetColor, TRACK_COLOR_HSV);
 }
 

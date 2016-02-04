@@ -8,7 +8,10 @@ public:
 	void setup();
 	void update();
 	void draw();
-
-	ofVideoGrabber cam;
-	ofImage gray, edge, sobel;
+	
+	ofImage distorted;
+    ofImage undistorted;
+    ofImage undistortedReference;
+	
+	ofxCv::Calibration calibration;
 };

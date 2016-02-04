@@ -5,7 +5,7 @@ using namespace cv;
 
 void ofApp::setup() {
 	ofSetVerticalSync(true);
-	cam.initGrabber(320, 240);
+	cam.setup(320, 240);
 	
 	// imitate() will set up previous and diff
 	// so they have the same size and type as cam
@@ -43,9 +43,9 @@ void ofApp::draw() {
 	float diffBlue = diffMean[2];
 	
 	ofSetColor(255, 0, 0);
-	ofRect(0, 0, diffRed, 10);
+	ofDrawRectangle(0, 0, diffRed, 10);
 	ofSetColor(0, 255, 0);
-	ofRect(0, 15, diffGreen, 10);
+	ofDrawRectangle(0, 15, diffGreen, 10);
 	ofSetColor(0, 0, 255);
-	ofRect(0, 30, diffBlue, 10);
+	ofDrawRectangle(0, 30, diffBlue, 10);
 }

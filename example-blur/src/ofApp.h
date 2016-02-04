@@ -8,7 +8,9 @@ public:
 	void setup();
 	void update();
 	void draw();
-
-	ofVideoGrabber cam;
-	ofImage gray, edge, sobel;
+    void keyPressed(int key);
+    
+    ofVideoGrabber cam;
+    ofImage img;
+    bool useGaussian;
 };

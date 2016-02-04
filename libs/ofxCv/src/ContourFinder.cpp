@@ -1,5 +1,6 @@
 #include "ofxCv/ContourFinder.h"
 #include "ofxCv/Wrappers.h"
+#include "ofGraphics.h"
 
 namespace ofxCv {
 
@@ -41,11 +42,11 @@ namespace ofxCv {
 			if(trackingColorMode == TRACK_COLOR_RGB) {
 				inRange(img, base - offset, base + offset, thresh);
 			} else {
-				if(TRACK_COLOR_H) {
+				if(trackingColorMode == TRACK_COLOR_H) {
 					offset[1] = 255;
 					offset[2] = 255;
 				}
-				if(TRACK_COLOR_HS) {
+				if(trackingColorMode == TRACK_COLOR_HS) {
 					offset[2] = 255;
 				}
 				cvtColor(img, hsvBuffer, CV_RGB2HSV);
@@ -159,7 +160,11 @@ namespace ofxCv {
 	
 	cv::Point2f ContourFinder::getCentroid(unsigned int i) const {
 		Moments m = moments(contours[i]);
-		return cv::Point2f(m.m10 / m.m00, m.m01 / m.m00);
+		if(m.m00!=0){
+			return cv::Point2f(m.m10 / m.m00, m.m01 / m.m00);
+		}else{
+			return cv::Point2f(0, 0);
+		}
 	}
 	
 	cv::Point2f ContourFinder::getAverage(unsigned int i) const {
@@ -285,7 +290,7 @@ namespace ofxCv {
 		ofNoFill();
 		for(int i = 0; i < (int)polylines.size(); i++) {
 			polylines[i].draw();
-			ofRect(toOf(getBoundingRect(i)));
+			ofDrawRectangle(toOf(getBoundingRect(i)));
 		}
 		ofPopStyle();
 	}
